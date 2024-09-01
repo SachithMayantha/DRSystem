@@ -1,0 +1,12 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.drsystem.controller.DashboardController">
+
+    <Label fx:id="welcomeLabel" text="Welcome!" style="-fx-font-size: 24px;"/>
+
+    <Button text="Report Disaster" onAction="#reportDisaster" />
+    <Button text="View Disasters" onAction="#viewDisasters" />
+
+</VBox>
