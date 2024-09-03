@@ -1,0 +1,9 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.drsystem.controller.AssessmentController">
+
+    <Label text="Assess Disaster" style="-fx-font-size: 24px;"/>
+    <!-- Include fields or tools for assessing disasters here -->
+
+</VBox>

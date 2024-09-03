@@ -9,30 +9,41 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<GridPane alignment="center" hgap="5" vgap="5" xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.example.drsystem.controller.UserController">
-    <Label text="Name:"/>
-    <TextField fx:id="nameField" GridPane.columnIndex="1"/>
+<?import javafx.scene.layout.VBox?>
+<VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.drsystem.controller.UserController">
 
-    <Label text="Email:" GridPane.rowIndex="1"/>
-    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <!-- User Registration Title -->
+    <Label text="User Registration" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
 
-    <Label text="Password:" GridPane.rowIndex="2"/>
-    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <!-- Registration Form -->
+    <GridPane alignment="center" hgap="5" vgap="5">
+        <Label text="Name/Department:"/>
+        <TextField fx:id="nameField" GridPane.columnIndex="1"/>
 
-    <Label text="Mobile:" GridPane.rowIndex="3"/>
-    <TextField fx:id="mobileField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label text="Email:" GridPane.rowIndex="1"/>
+        <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-    <Label text="Role:" GridPane.rowIndex="4"/>
-    <ComboBox fx:id="roleComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="USER"/>
-                <String fx:value="ADMIN"/>
-            </FXCollections>
-        </items>
-    </ComboBox>
+        <Label text="Password:" GridPane.rowIndex="2"/>
+        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-    <Button onAction="#registerUser" text="Register" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-</GridPane>
+        <Label text="Mobile:" GridPane.rowIndex="3"/>
+        <TextField fx:id="mobileField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <Label text="Role:" GridPane.rowIndex="4"/>
+        <ComboBox fx:id="roleComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="USER"/>
+                    <String fx:value="ADMIN"/>
+                    <String fx:value="DEPARTMENT"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Button onAction="#registerUser" text="Register" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    </GridPane>
+
+</VBox>
+
 

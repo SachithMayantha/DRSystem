@@ -41,19 +41,18 @@ public class UserController {
     private DatabaseConnection databaseConnection;
 
     ResultSet resultSet;
-
+    User user = new User();
     public UserController() {
         databaseConnection = new DatabaseConnection();
     }
 
     @FXML
     public boolean login(ActionEvent event) throws SQLException {
-        System.out.println("inside login()");
         String email = emailField.getText();
         String password = passwordField.getText();
 
         if (validateLogin(email, password)) {
-            User user = new User();
+
             user.setRole(resultSet.getString("role"));
             navigateToDashboard(event);
         } else {
@@ -90,11 +89,6 @@ public class UserController {
         alert.showAndWait();
     }
 
-    public boolean registerUser(User user) {
-        // Logic to register a new user
-        return true; // Example: return true if registration is successful
-    }
-
     @FXML
     private void goToRegistration(ActionEvent event) {
         try {
@@ -111,7 +105,7 @@ public class UserController {
     }
 
     @FXML
-    private void registerUser() {
+    private void registerUser(ActionEvent event) throws IOException {
         // Get values from input fields
         String name = nameField.getText();
         String email = emailField.getText();
@@ -127,7 +121,14 @@ public class UserController {
 
         // Attempt to save the user to the database
         if (saveUserToDatabase(name, email, password, mobile, role)) {
-            showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "User registered successfully");
+            user.setRole(role);
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/login.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("User Registration");
+            stage.setScene(new Scene(root, 620, 440));
+            stage.show();
+            Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            loginStage.close();
 
         } else {
             showAlert(Alert.AlertType.ERROR, "Registration Failed", "Failed to register user");
@@ -135,8 +136,7 @@ public class UserController {
     }
 
     private boolean saveUserToDatabase(String name, String email, String password, String mobile, String role) {
-        // encode password before save to database
-        String encodedPassword = Base64.getEncoder().encodeToString(password.getBytes());
+
         String sql = "INSERT INTO user (name, email, password, mobile, role) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = databaseConnection.connect();
@@ -145,7 +145,7 @@ public class UserController {
             // Set parameters for the prepared statement
             statement.setString(1, name);
             statement.setString(2, email);
-            statement.setString(3, encodedPassword);
+            statement.setString(3, password);
             statement.setString(4, mobile);
             statement.setString(5, role);
 
@@ -161,7 +161,14 @@ public class UserController {
 
     private void navigateToDashboard(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/dashboard.fxml"));
+            Parent root;
+            if (user.getRole().equals("ADMIN")){
+                root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/admin-dashboard.fxml"));
+            } else if (user.getRole().equals("DEPARTMENT")) {
+                root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/department-dashboard.fxml"));
+            } else {
+                root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/dashboard.fxml"));
+            }
             Stage stage = new Stage();
             stage.setTitle("Disaster Response System Dashboard");
             stage.setScene(new Scene(root, 700, 500)); // Set the desired fixed size
