@@ -1,25 +1,26 @@
 package com.example.drsystem.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Disaster {
 
     private int disasterId;
     private String type;
     private String location;
-
+    private String locationType;
     private String description;
 
     private String severity;
 
-    private Date date;
+    private LocalDate date;
 
     private String reportedBy;
 
-    public Disaster(int disasterId, String type, String location, String description, String severity, Date date, String reportedBy) {
+    public Disaster(int disasterId, String type, String location, String locationType, String description, String severity, LocalDate date, String reportedBy) {
         this.disasterId = disasterId;
         this.type = type;
         this.location = location;
+        this.locationType = locationType;
         this.description = description;
         this.severity = severity;
         this.date = date;
@@ -50,6 +51,13 @@ public class Disaster {
         this.location = location;
     }
 
+    public String getLocationType() {
+        return locationType;
+    }
+    public void setLocationType(String locationType) {
+        this.locationType = locationType;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -66,11 +74,11 @@ public class Disaster {
         this.severity = severity;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

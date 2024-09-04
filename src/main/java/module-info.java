@@ -15,4 +15,6 @@ module com.example.drsystem {
     exports com.example.drsystem;
     exports com.example.drsystem.controller;
     opens com.example.drsystem.controller to javafx.fxml;
+    exports com.example.drsystem.model;
+    opens com.example.drsystem.model to javafx.fxml;
 }

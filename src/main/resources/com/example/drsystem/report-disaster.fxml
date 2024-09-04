@@ -26,11 +26,22 @@
     <Label text="Location:" GridPane.rowIndex="1"/>
     <TextField fx:id="locationField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-    <Label text="Description:" GridPane.rowIndex="2"/>
-    <TextField fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Label text="Type of Location:" GridPane.rowIndex="2"/>
+    <ComboBox fx:id="locationTypeComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Urban Area"/>
+                <String fx:value="Rural Area"/>
+                <String fx:value="Industrial Zone"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
 
-    <Label text="Severity:" GridPane.rowIndex="3"/>
-    <ComboBox fx:id="severityComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3">
+    <Label text="Description:" GridPane.rowIndex="3"/>
+    <TextField fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Label text="Severity:" GridPane.rowIndex="4"/>
+    <ComboBox fx:id="severityComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="Low"/>
@@ -42,15 +53,15 @@
         </items>
     </ComboBox>
 
-    <Label text="Date:" GridPane.rowIndex="4"/>
-    <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+    <Label text="Date:" GridPane.rowIndex="5"/>
+    <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-    <Label text="Reported By:" GridPane.rowIndex="5"/>
-    <TextField fx:id="reportedByField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    <Label text="Reported By:" GridPane.rowIndex="6"/>
+    <TextField fx:id="reportedByField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
-    <Label text="Upload Image:" GridPane.rowIndex="6"/>
-    <Button text="Choose File" onAction="#handleImageUpload" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-    <Label fx:id="imageLabel" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+    <Label text="Upload Image:" GridPane.rowIndex="7"/>
+    <Button text="Choose File" onAction="#handleImageUpload" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+    <Label fx:id="imageLabel" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
 
-    <Button text="Submit" onAction="#submitDisasterReport" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+    <Button text="Submit" onAction="#submitDisasterReport" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
 </GridPane>
