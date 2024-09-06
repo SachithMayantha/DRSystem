@@ -32,8 +32,12 @@ public class DashboardController {
     }
 
     @FXML
-    private void viewDisasters() {
-        // Logic to navigate to the "View Disasters" screen
+    private void viewDisasters() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/view-disasters.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Disaster Table");
+        stage.setScene(new Scene(root, 620, 440));
+        stage.show();
     }
 
     public void assessDisaster(ActionEvent event) {

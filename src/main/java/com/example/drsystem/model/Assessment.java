@@ -6,7 +6,7 @@ public class Assessment {
 
     private int assessmentId;
     private int disasterId;
-    private String priorityLevel;
+    private int priorityNo;
     private List<Department> departmentList;
 
 }

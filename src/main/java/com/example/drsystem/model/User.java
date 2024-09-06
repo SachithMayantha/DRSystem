@@ -1,7 +1,5 @@
 package com.example.drsystem.model;
 
-import java.sql.ResultSet;
-
 public class User {
 
     private int userId;
@@ -10,6 +8,9 @@ public class User {
     private String password;
     private int mobile;
     private String role;
+
+    public User(int id, String name, String email, String role, String mobile) {
+    }
 
     public int getUserId() {
         return userId;
@@ -43,7 +44,7 @@ public class User {
         this.password = password;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 

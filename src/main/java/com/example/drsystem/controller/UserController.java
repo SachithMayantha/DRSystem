@@ -137,11 +137,11 @@ public class UserController {
 
     private boolean saveUserToDatabase(String name, String email, String password, String mobile, String role) {
 
-        String sql = "INSERT INTO user (name, email, password, mobile, role) VALUES (?, ?, ?, ?, ?)";
+        String userSql = "INSERT INTO user (name, email, password, mobile, role) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = databaseConnection.connect();
-             PreparedStatement statement = conn.prepareStatement(sql)) {
-
+        PreparedStatement statement;
+        try (Connection conn = databaseConnection.connect()) {
+            statement = conn.prepareStatement(userSql);
             // Set parameters for the prepared statement
             statement.setString(1, name);
             statement.setString(2, email);
@@ -151,6 +151,17 @@ public class UserController {
 
             // Execute the update
             int rowsInserted = statement.executeUpdate();
+            if (role.equals("DEPARTMENT")) {
+                String departmentSql = "INSERT INTO department (name, email, mobile) VALUES (?, ?, ?)";
+                statement = conn.prepareStatement(departmentSql);
+
+                statement.setString(1, name);
+                statement.setString(2, email);
+                statement.setString(3, mobile);
+
+                statement.executeUpdate();
+            }
+
             return rowsInserted > 0; // Return true if at least one row was inserted
 
         } catch (SQLException e) {
