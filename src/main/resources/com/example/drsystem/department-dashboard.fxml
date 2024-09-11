@@ -20,6 +20,7 @@
             <TableColumn text="Severity" fx:id="severityColumn"/>
             <TableColumn text="Date" fx:id="dateColumn"/>
             <TableColumn text="Reported By" fx:id="reportedByColumn"/>
+            <TableColumn text="Priority Number" fx:id="priorityNoColumn"/>
         </columns>
     </TableView>
 
@@ -27,6 +28,6 @@
     <Label text="Requested Resources:"/>
     <TextArea fx:id="requestedResourcesArea" prefRowCount="5" prefColumnCount="20" wrapText="true" editable="false"/>
 
-    <Button text="Respond to Request" onAction="#respondToRequest" />
+<!--    <Button text="Respond to Request" onAction="#respondToRequest" />-->
 
 </VBox>

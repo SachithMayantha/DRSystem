@@ -57,7 +57,7 @@ public class DisasterTableController {
     @FXML
     private TextArea requestedResourcesArea;
 
-    private int selectedDisasterId; // Store the selected disaster ID
+    public static int selectedDisasterId; // Store the selected disaster ID
 
     private List<Disaster> disasterList = new ArrayList<>();
 
@@ -140,9 +140,8 @@ public class DisasterTableController {
                         getResource("/com/example/drsystem/health_resource_allocation.fxml"));
                 Parent resourceRoot = resourceLoader.load();
 
-                // Get the ResourceController from the FXML and pass the disaster ID
-                ResourceController resourceController = resourceLoader.getController();
-                resourceController.setSelectedId(disaster.getDisasterId());
+                // Get the selected disaster ID
+                selectedDisasterId = disaster.getDisasterId();
 
             } catch (IOException e) {
                 e.printStackTrace();
