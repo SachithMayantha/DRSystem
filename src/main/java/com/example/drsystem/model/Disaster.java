@@ -16,7 +16,9 @@ public class Disaster {
 
     private String reportedBy;
 
-    public Disaster(int disasterId, String type, String location, String locationType, String description, String severity, LocalDate date, String reportedBy) {
+    private int priorityNo;
+
+    public Disaster(int disasterId, String type, String location, String locationType, String description, String severity, LocalDate date, String reportedBy, int priorityNo) {
         this.disasterId = disasterId;
         this.type = type;
         this.location = location;
@@ -25,6 +27,15 @@ public class Disaster {
         this.severity = severity;
         this.date = date;
         this.reportedBy = reportedBy;
+        this.priorityNo= priorityNo;
+    }
+
+    public int getPriorityNo() {
+        return priorityNo;
+    }
+
+    public void setPriorityNo(int priorityNo) {
+        this.priorityNo = priorityNo;
     }
 
     public int getDisasterId() {

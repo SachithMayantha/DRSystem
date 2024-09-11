@@ -6,10 +6,14 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private int mobile;
+    private String mobile;
     private String role;
 
     public User(int id, String name, String email, String role, String mobile) {
+    }
+
+    public User() {
+
     }
 
     public int getUserId() {
@@ -48,7 +52,7 @@ public class User {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 

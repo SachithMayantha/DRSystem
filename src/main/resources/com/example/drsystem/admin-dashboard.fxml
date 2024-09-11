@@ -10,12 +10,8 @@
     </HBox>
     <Label fx:id="welcomeLabel" text="Welcome, Administrator!" style="-fx-font-size: 24px;"/>
 
-    <Button text="Report Disaster" onAction="#reportDisaster" />
-    <Button text="View Disasters" onAction="#viewDisasters" />
-
-    <!-- Extra features for Admin -->
-    <Button text="Assess Disaster" onAction="#assessDisaster" />
-    <Button text="Notification System" onAction="#manageNotifications" />
+    <Button text="View Disasters" onAction="#viewAdminDisasters" />
+    <Button text="Edit Users" onAction="#assessDisaster" />
 
 </VBox>
 

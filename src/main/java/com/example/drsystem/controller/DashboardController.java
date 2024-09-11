@@ -32,8 +32,17 @@ public class DashboardController {
     }
 
     @FXML
-    private void viewDisasters() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/view-disasters.fxml"));
+    private void viewAdminDisasters() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/admin-disaster-table.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Disaster Table");
+        stage.setScene(new Scene(root, 620, 440));
+        stage.show();
+    }
+
+    @FXML
+    private void viewUserDisasters() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/user-disasters-table.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Disaster Table");
         stage.setScene(new Scene(root, 620, 440));
@@ -43,8 +52,6 @@ public class DashboardController {
     public void assessDisaster(ActionEvent event) {
     }
 
-    public void manageNotifications(ActionEvent event) {
-    }
 
     @FXML
     private void logout(ActionEvent event) {

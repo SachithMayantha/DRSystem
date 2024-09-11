@@ -4,7 +4,7 @@
 <?import javafx.scene.control.TableColumn?>
 
 <VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.drsystem.controller.DepartmentController">
+      fx:controller="com.example.drsystem.controller.DisasterTableController">
 
     <Label text="Disaster Table" style="-fx-font-size: 24px;"/>
 

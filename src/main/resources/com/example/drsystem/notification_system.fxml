@@ -1,9 +1,0 @@
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.drsystem.controller.ResponseController">
-
-    <Label text="Notification System" style="-fx-font-size: 24px;"/>
-    <!-- Include fields or tools for managing notifications here -->
-
-</VBox>

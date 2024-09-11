@@ -4,11 +4,11 @@ import com.example.drsystem.model.Disaster;
 
 public class AssessmentController {
 
-    public int assessDisaster(Disaster disaster) {
+    public static int assessDisaster(String type,String locationType,String severity) {
         int priority = 0;
 
         // Assess severity
-        switch (disaster.getSeverity()) {
+        switch (severity) {
             case "Critical":
                 priority += 5;
                 break;
@@ -27,16 +27,16 @@ public class AssessmentController {
         }
 
         // Assess location - for example, a disaster in a densely populated area might be given a higher priority
-        if (disaster.getLocation().equals("Urban Area")) {
+        if (locationType.equals("Urban Area")) {
             priority += 3;
-        } else if (disaster.getLocation().equals("Industrial Zone")) {
+        } else if (locationType.equals("Industrial Zone")) {
             priority += 4;
         } else {
             priority += 2;
         }
 
         // Assess the type of disaster
-        switch (disaster.getType()) {
+        switch (type) {
             case "Fire":
                 priority += 4;
                 break;

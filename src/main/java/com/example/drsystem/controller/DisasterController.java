@@ -1,17 +1,27 @@
 package com.example.drsystem.controller;
 
 import com.example.drsystem.DatabaseConnection;
+import com.example.drsystem.model.Disaster;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DisasterController {
 
@@ -71,8 +81,12 @@ public class DisasterController {
         }
     }
 
-    private boolean saveDisasterToDatabase(String type, String location, String locationType, String description, String severity, java.sql.Date date, String reportedBy) {
-        String sql = "INSERT INTO disaster (type, location, description, severity, date, reportedBy, locationType) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private boolean saveDisasterToDatabase(String type, String location, String locationType, String description,
+                                           String severity, java.sql.Date date, String reportedBy) {
+        //quick and accurate assessment of the reported disasters and providing prioritized number
+        int priorityNo = AssessmentController.assessDisaster(type, locationType,severity);
+
+        String sql = "INSERT INTO disaster (type, location, description, severity, date, reportedBy, locationType, priorityNo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = databaseConnection.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -84,6 +98,7 @@ public class DisasterController {
             stmt.setDate(5, date);
             stmt.setString(6, reportedBy);
             stmt.setString(7, locationType);
+            stmt.setInt(8, priorityNo);
 
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0; // Return true if at least one row was inserted
@@ -113,14 +128,6 @@ public class DisasterController {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    public void assessDisaster(int disasterId) {
-        // Logic to assess a reported disaster
-    }
-
-    public void coordinateResponse(int disasterId) {
-        // Logic to coordinate different departments and people
     }
 
 }

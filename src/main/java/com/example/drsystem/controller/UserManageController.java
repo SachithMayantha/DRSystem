@@ -97,7 +97,8 @@ public class UserManageController {
                 Connection conn = databaseConnection.connect();
                 String query = "DELETE FROM user WHERE id = ?";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
-                preparedStatement.setInt(1, selectedUser.getUserId());
+                preparedStatement.setInt(1, selectedUser.getUserId()
+                );
                 preparedStatement.executeUpdate();
 
                 userList.remove(selectedUser);

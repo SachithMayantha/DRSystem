@@ -1,0 +1,20 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" spacing="15" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.drsystem.controller.ResourceController">
+
+    <Label text="Resource Allocation" style="-fx-font-size: 20px;" />
+
+    <GridPane hgap="10" vgap="10">
+        <Label text="Department:"/>
+        <Label fx:id="departmentLabel" GridPane.columnIndex="1"/>
+
+        <Label text="Number of Resources:" GridPane.rowIndex="1"/>
+        <TextField fx:id="resourcesField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    </GridPane>
+
+    <Button text="Allocate Resources" onAction="#submitResourceAllocation"/>
+</VBox>

@@ -19,7 +19,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Base64;
 
 public class UserController {
 
@@ -178,7 +177,7 @@ public class UserController {
             } else if (user.getRole().equals("DEPARTMENT")) {
                 root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/department-dashboard.fxml"));
             } else {
-                root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/dashboard.fxml"));
+                root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/user-dashboard.fxml"));
             }
             Stage stage = new Stage();
             stage.setTitle("Disaster Response System Dashboard");
