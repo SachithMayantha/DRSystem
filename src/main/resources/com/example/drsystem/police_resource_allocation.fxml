@@ -6,7 +6,7 @@
 <VBox alignment="CENTER" spacing="15" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.drsystem.controller.ResourceController">
 
-    <Label text="Resource Allocation" style="-fx-font-size: 20px;" />
+    <Label text="Police Resource Allocation" style="-fx-font-size: 20px;" />
 
     <GridPane hgap="10" vgap="10">
         <Label text="Department:"/>
@@ -16,5 +16,5 @@
         <TextField fx:id="resourcesField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
     </GridPane>
 
-    <Button text="Allocate Resources" onAction="#submitResourceAllocation"/>
+    <Button text="Allocate Resources" onAction="#policeResourceAllocation"/>
 </VBox>

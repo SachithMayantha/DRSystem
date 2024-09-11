@@ -57,6 +57,8 @@ public class DisasterTableController {
     @FXML
     private TextArea requestedResourcesArea;
 
+    private int selectedDisasterId; // Store the selected disaster ID
+
     private List<Disaster> disasterList = new ArrayList<>();
 
     private DatabaseConnection databaseConnection;
@@ -85,8 +87,8 @@ public class DisasterTableController {
 
         // Add listener to display requested resources when a disaster is selected
         disasterTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showDisasterDetails(newValue)
-        );
+                (observable, oldValue, newValue) ->
+                    showDisasterDetails(newValue));
     }
 
     private void loadDataFromDatabase() {
@@ -133,36 +135,18 @@ public class DisasterTableController {
                 stage.setScene(new Scene(root, 620, 440));
                 stage.show();
 
+                // Get the resource allocation controller for the resource allocation
+                FXMLLoader resourceLoader = new FXMLLoader(getClass().
+                        getResource("/com/example/drsystem/health_resource_allocation.fxml"));
+                Parent resourceRoot = resourceLoader.load();
+
+                // Get the ResourceController from the FXML and pass the disaster ID
+                ResourceController resourceController = resourceLoader.getController();
+                resourceController.setSelectedId(disaster.getDisasterId());
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void resourceAllocationPolice() throws IOException {
-        Parent root = FXMLLoader.load(getClass().
-                getResource("/com/example/drsystem/police_resource_allocation.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Police Department");
-        stage.setScene(new Scene(root, 620, 440));
-        stage.show();
-    }
-
-    public void resourceAllocationHealth() throws IOException {
-        Parent root = FXMLLoader.load(getClass().
-                getResource("/com/example/drsystem/health_resource_allocation.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Health Department");
-        stage.setScene(new Scene(root, 620, 440));
-        stage.show();
-    }
-
-    public void resourceAllocationFire() throws IOException {
-        Parent root = FXMLLoader.load(getClass().
-                getResource("/com/example/drsystem/fire_resource_allocation.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Fire Emergency");
-        stage.setScene(new Scene(root, 620, 440));
-        stage.show();
     }
 }
