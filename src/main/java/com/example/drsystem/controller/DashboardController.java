@@ -13,14 +13,6 @@ import java.io.IOException;
 
 public class DashboardController {
 
-    @FXML
-    private Label welcomeLabel;
-
-    public void initialize() {
-        // Set a welcome message, optionally personalized
-        welcomeLabel.setText("Welcome to the Disaster Response System!");
-    }
-
     // navigate report disaster user interface
     @FXML
     private void reportDisaster() throws IOException {
@@ -69,5 +61,28 @@ public class DashboardController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+        @FXML
+        private void viewFAQ() {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass()
+                        .getResource("/com/example/drsystem/faq_view.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = new Stage();
+                stage.setTitle("Frequently Asked Questions");
+                stage.setScene(new Scene(root, 620, 440));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    @FXML
+    private void goBackToDashboard(ActionEvent event) {
+        // Close the current dashboard window
+        Stage dashboardStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        dashboardStage.close();
     }
 }

@@ -10,6 +10,7 @@ module com.example.drsystem {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires org.apache.poi.ooxml;
 
     opens com.example.drsystem to javafx.fxml;
     exports com.example.drsystem;

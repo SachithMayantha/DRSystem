@@ -1,6 +1,7 @@
 package com.example.drsystem.controller;
 
 import com.example.drsystem.model.Disaster;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -76,6 +77,34 @@ public class DisasterManageController {
                 getResource("/com/example/drsystem/fire_resource_allocation.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Fire Emergency");
+        stage.setScene(new Scene(root, 620, 440));
+        stage.show();
+    }
+
+    @FXML
+    public void showHealthResources(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().
+                getResource("/com/example/drsystem/health_resources_view.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Health Department");
+        stage.setScene(new Scene(root, 620, 440));
+        stage.show();
+    }
+
+    public void showFireResources(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().
+                getResource("/com/example/drsystem/fire_resources_view.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Fire Emergency");
+        stage.setScene(new Scene(root, 620, 440));
+        stage.show();
+    }
+
+    public void showPoliceResources(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().
+                getResource("/com/example/drsystem/police_resources_view.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Police Department");
         stage.setScene(new Scene(root, 620, 440));
         stage.show();
     }

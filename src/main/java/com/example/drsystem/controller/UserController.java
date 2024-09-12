@@ -39,6 +39,8 @@ public class UserController {
 
     private DatabaseConnection databaseConnection;
 
+    static String role;
+
     ResultSet resultSet;
     User user = new User();
     public UserController() {
@@ -170,6 +172,7 @@ public class UserController {
     }
 
     private void navigateToDashboard(ActionEvent event) {
+        role =user.getRole();
         try {
             Parent root;
             if (user.getRole().equals("ADMIN")){

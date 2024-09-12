@@ -3,17 +3,25 @@ package com.example.drsystem.controller;
 import com.example.drsystem.DatabaseConnection;
 import com.example.drsystem.model.Disaster;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,7 +65,9 @@ public class DisasterTableController {
     @FXML
     private TextArea requestedResourcesArea;
 
-    public static int selectedDisasterId; // Store the selected disaster ID
+    static int selectedDisasterId; // Store the selected disaster ID
+
+    private static String role;
 
     private List<Disaster> disasterList = new ArrayList<>();
 
@@ -111,7 +121,8 @@ public class DisasterTableController {
                 System.out.println(priorityNo+ "Value");
 
                 // Create a new Disaster object and add it to the list
-                Disaster disaster = new Disaster(disasterId, type, location, locationType, description, severity, date.toLocalDate(),reportedBy, priorityNo);
+                Disaster disaster = new Disaster(disasterId, type,
+                        location, locationType, description, severity, date.toLocalDate(),reportedBy, priorityNo);
                 disasterList.add(disaster);
             }
 
@@ -120,9 +131,20 @@ public class DisasterTableController {
         }
     }
     private void showDisasterDetails(Disaster disaster) {
+
         if (disaster != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/drsystem/disaster-details.fxml"));
+                role = UserController.role;
+                FXMLLoader loader;
+                if(role.equals("ADMIN")){
+                    loader = new FXMLLoader(getClass()
+                        .getResource("/com/example/drsystem/disaster-details.fxml"));
+                } else if (role.equals("DEPARTMENT")) {
+                    loader = new FXMLLoader(getClass()
+                            .getResource("/com/example/drsystem/department_resource_view.fxml"));
+                }else{
+                    loader = new FXMLLoader();
+                }
                 Parent root = loader.load();
 
                 // Get the controller of the details window and pass the selected disaster
@@ -147,5 +169,68 @@ public class DisasterTableController {
                 e.printStackTrace();
             }
         }
+    }
+    @FXML
+    private void downloadAsExcel() {
+        // Open file chooser to save the Excel file
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            exportTableToExcel(file);
+        }
+    }
+
+    private void exportTableToExcel(File file) {
+        try (XSSFWorkbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Disaster Data");
+
+            // Create header row
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("Disaster ID");
+            headerRow.createCell(1).setCellValue("Disaster Type");
+            headerRow.createCell(2).setCellValue("Location");
+            headerRow.createCell(3).setCellValue("Location Type");
+            headerRow.createCell(4).setCellValue("Description");
+            headerRow.createCell(5).setCellValue("Severity");
+            headerRow.createCell(6).setCellValue("Date");
+            headerRow.createCell(7).setCellValue("Reported By");
+            headerRow.createCell(8).setCellValue("Priority Number");
+
+            // Get the data from the TableView
+            ObservableList<Disaster> disasterList = disasterTable.getItems();
+
+            // Populate the sheet with data
+            for (int i = 0; i < disasterList.size(); i++) {
+                Disaster disaster = disasterList.get(i);
+                Row row = sheet.createRow(i + 1);
+                row.createCell(0).setCellValue(disaster.getDisasterId());
+                row.createCell(1).setCellValue(disaster.getType());
+                row.createCell(2).setCellValue(disaster.getLocation());
+                row.createCell(3).setCellValue(disaster.getLocationType());
+                row.createCell(4).setCellValue(disaster.getDescription());
+                row.createCell(5).setCellValue(disaster.getSeverity());
+                row.createCell(6).setCellValue(disaster.getDate().toString());
+                row.createCell(7).setCellValue(disaster.getReportedBy());
+                row.createCell(8).setCellValue(disaster.getPriorityNo());
+            }
+
+            // Write the workbook to the file
+            try (FileOutputStream outputStream = new FileOutputStream(file)) {
+                workbook.write(outputStream);
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Disaster data exported successfully.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to export data.");
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
