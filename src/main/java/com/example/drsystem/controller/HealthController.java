@@ -40,7 +40,7 @@ public class HealthController {
     }
 
     @FXML
-    public void healthResourceAllocation(ActionEvent event) {
+    public void healthResourceAllocation() {
 
         String doctors = doctorsField.getText();
         String nurses = nursesField.getText();

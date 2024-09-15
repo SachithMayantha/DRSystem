@@ -82,7 +82,7 @@ public class DisasterManageController {
     }
 
     @FXML
-    public void showHealthResources(ActionEvent event) throws IOException {
+    public void showHealthResources() throws IOException {
         Parent root = FXMLLoader.load(getClass().
                 getResource("/com/example/drsystem/health_resources_view.fxml"));
         Stage stage = new Stage();
@@ -91,7 +91,7 @@ public class DisasterManageController {
         stage.show();
     }
 
-    public void showFireResources(ActionEvent event) throws IOException {
+    public void showFireResources() throws IOException {
         Parent root = FXMLLoader.load(getClass().
                 getResource("/com/example/drsystem/fire_resources_view.fxml"));
         Stage stage = new Stage();
@@ -100,7 +100,7 @@ public class DisasterManageController {
         stage.show();
     }
 
-    public void showPoliceResources(ActionEvent event) throws IOException {
+    public void showPoliceResources() throws IOException {
         Parent root = FXMLLoader.load(getClass().
                 getResource("/com/example/drsystem/police_resources_view.fxml"));
         Stage stage = new Stage();

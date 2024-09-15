@@ -1,24 +1,15 @@
 package com.example.drsystem.controller;
 
 import com.example.drsystem.DatabaseConnection;
-import com.example.drsystem.model.Disaster;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DepartmentController {
 
@@ -71,7 +62,8 @@ public class DepartmentController {
     }
 
     private void getPoliceResources(int disasterId) {
-        String query = "SELECT policeman, trafficControllers, investigators, status FROM health WHERE disasterId = ?";
+        String query = "SELECT policeman, trafficControllers, " +
+                "investigators, status FROM health WHERE disasterId = ?";
 
         try (Connection conn = DatabaseConnection.connect();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -95,13 +87,15 @@ public class DepartmentController {
                     investigatorLabel.setText(String.valueOf(investigators));
                     statusComboBox.setValue(status);
                 } else {
-                    showAlert(Alert.AlertType.INFORMATION, "No Data", "No police resource data found for this disaster.");
+                    showAlert(Alert.AlertType.
+                            INFORMATION, "No Data", "No police resource data found for this disaster.");
                 }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to retrieve police resource data.");
+            showAlert(Alert.AlertType.
+                    ERROR, "Database Error", "Failed to retrieve police resource data.");
         }
     }
 
@@ -143,7 +137,8 @@ public class DepartmentController {
 
     public void getFireResources(int disasterId) {
 
-        String query = "SELECT fighters, supporters, suppression, status FROM fire WHERE disasterId = ?";
+        String query = "SELECT fighters, " +
+                "supporters, suppression, status FROM fire WHERE disasterId = ?";
 
         try (Connection conn = DatabaseConnection.connect();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -211,7 +206,7 @@ public class DepartmentController {
     }
 
     @FXML
-    public void saveFireResourceStatus(ActionEvent event) {
+    public void saveFireResourceStatus() {
         String status = statusComboBox.getValue();
 
         String query = "UPDATE fire SET status = ? WHERE disasterId = ?";
@@ -223,7 +218,8 @@ public class DepartmentController {
             stmt.setInt(2, disasterId);
             stmt.executeUpdate();
 
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Fire Emergency resource status updated successfully.");
+            showAlert(Alert.AlertType
+                    .INFORMATION, "Success", "Fire Emergency resource status updated successfully.");
 
             // Close the current window
             Stage stage = (Stage) statusComboBox.getScene().getWindow();
@@ -231,11 +227,12 @@ public class DepartmentController {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to update status.");
+            showAlert(Alert.AlertType
+                    .ERROR, "Database Error", "Failed to update status.");
         }
     }
 
-    public void savePoliceResourceStatus(ActionEvent event) {
+    public void savePoliceResourceStatus() {
         String status = statusComboBox.getValue();
 
         String query = "UPDATE police SET status = ? WHERE disasterId = ?";
@@ -247,7 +244,8 @@ public class DepartmentController {
             stmt.setInt(2, disasterId);
             stmt.executeUpdate();
 
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Police Department resource status updated successfully.");
+            showAlert(Alert.AlertType
+                    .INFORMATION, "Success", "Police Department resource status updated successfully.");
 
             // Close the current window
             Stage stage = (Stage) statusComboBox.getScene().getWindow();

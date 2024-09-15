@@ -1,7 +1,5 @@
 package com.example.drsystem.controller;
 
-import com.example.drsystem.model.Disaster;
-
 public class AssessmentController {
 
     public static int assessDisaster(String type,String locationType,String severity) {

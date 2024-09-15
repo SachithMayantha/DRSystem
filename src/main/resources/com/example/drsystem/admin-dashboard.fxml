@@ -10,8 +10,8 @@
     </HBox>
     <Label fx:id="welcomeLabel" text="Welcome, Administrator!" style="-fx-font-size: 24px;"/>
 
-    <Button text="View Disasters" onAction="#viewAdminDisasters" />
-    <Button text="Edit Users" onAction="#assessDisaster" />
+    <Button text="View Assessed Disasters" onAction="#viewAdminDisasters" />
+    <Button text="Edit Users"/>
 
 </VBox>
 

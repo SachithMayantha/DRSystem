@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,7 +15,8 @@ public class DashboardController {
     // navigate report disaster user interface
     @FXML
     private void reportDisaster() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/report-disaster.fxml"));
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("/com/example/drsystem/report-disaster.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Report Disaster");
         stage.setScene(new Scene(root, 620, 440));
@@ -25,7 +25,8 @@ public class DashboardController {
 
     @FXML
     private void viewAdminDisasters() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/admin-disaster-table.fxml"));
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("/com/example/drsystem/admin-disaster-table.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Disaster Table");
         stage.setScene(new Scene(root, 620, 440));
@@ -34,21 +35,20 @@ public class DashboardController {
 
     @FXML
     private void viewUserDisasters() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/user-disasters-table.fxml"));
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("/com/example/drsystem/user-disasters-table.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Disaster Table");
         stage.setScene(new Scene(root, 620, 440));
         stage.show();
     }
 
-    public void assessDisaster(ActionEvent event) {
-    }
-
 
     @FXML
     private void logout(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/drsystem/login.fxml"));
+            Parent root = FXMLLoader.load(getClass()
+                    .getResource("/com/example/drsystem/login.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Login");
             stage.setScene(new Scene(root, 620, 440)); // Set the desired size for the login window
